@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "iury_api"
+version = "0.1.0"
+description = ""
+authors = ["iuryrosal <iuryrosal@gmail.com>"]
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+faker = "^37.0.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
