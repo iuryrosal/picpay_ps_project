@@ -7,7 +7,7 @@ class UserRepository:
     def __init__(self) -> None:
         self.db_client = SqLiteClient()
     
-    def create_user(self, id, first_name, email, last_name=None):
+    def create(self, id, first_name, email, last_name=None):
         user = UserModel(id=id,
                          first_name=first_name,
                          last_name=last_name,
@@ -15,10 +15,10 @@ class UserRepository:
         self.db_client().add(user)
         self.db_client().commit()
     
-    def select_all_users(self):
+    def select_all(self):
         return self.db_client().query(UserModel).all()
     
-    def select_user_by_id(self, user_id):
+    def select_by_id(self, user_id):
         return self.db_client().query(UserModel).filter(UserModel.id == user_id).first()
 
     def update(self, data: Dict[str, Any]):
@@ -30,7 +30,7 @@ class UserRepository:
 
         self.db_client().commit()
 
-    def delete_user_by_id(self, user_id) -> None:
+    def delete_by_id(self, user_id) -> None:
         user = self.select_user_by_id(user_id)
         if not user:
             raise ValueError(f"User with id {user_id} not exists.")
