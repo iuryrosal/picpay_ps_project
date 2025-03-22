@@ -11,5 +11,3 @@ class User(SqLiteBase):
     first_name = sqlalchemy.Column("first_name", sqlalchemy.String, nullable=False)
     last_name = sqlalchemy.Column("last_name", sqlalchemy.String, nullable=True)
     email = sqlalchemy.Column("email", sqlalchemy.String, nullable=False)
-    created_at = sqlalchemy.Column("created_at", sqlalchemy.Datetime(timezone=True), nullable=False)
-    updated_at = sqlalchemy.Column("updated_at", sqlalchemy.Datetime(timezone=True), nullable=True)
