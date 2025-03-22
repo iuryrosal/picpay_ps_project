@@ -1,5 +1,6 @@
-import sqlite3
 from faker import Faker
+from db.sqllite_client import SqLiteClient, SqLiteBase
+from models.user_model import UserModel
 
 
 def generate_fake_data():
@@ -14,29 +15,14 @@ def generate_fake_data():
 
 
 if __name__ == "__main__":
-    try:
-        with sqlite3.connect("database.db",
-                             detect_types=sqlite3.PARSE_DECLTYPES |
-                             sqlite3.PARSE_COLNAMES) as conn:
-            print(f"Opened SQLite database with version {sqlite3.sqlite_version} successfully.")
-            cursor_obj = conn.cursor()
-
-            table = """ CREATE TABLE IF NOT EXISTS users (
-                id CHAR(25) NOT NULL,
-                first_name CHAR(25) NOT NULL,
-                last_name CHAR(25),
-                email VARCHAR(255) NOT NULL
-            ); """
-
-            cursor_obj.execute(table)
-            for customer_id in range(100):
-                fake_customer = generate_fake_data()
-                cursor_obj.execute("""
-                    INSERT INTO users (id, first_name, last_name, email)
-                    VALUES (?, ?, ?, ?);
-                """, (customer_id,) + tuple(fake_customer.values()))
-                conn.commit()
-
-            cursor_obj.close()
-    except sqlite3.OperationalError as e:
-        print("Failed during connection with database: ", e)
+    sqlite_client = SqLiteClient()
+    SqLiteBase.metadata.create_all(bind=sqlite_client._engine)
+    for _ in range(100):
+        fake_user = generate_fake_data()
+        with next(sqlite_client()) as db_session:
+            user = UserModel(first_name=fake_user["first_name"],
+                            last_name=fake_user["last_name"],
+                            email=fake_user["email"])
+            db_session.add(user)
+            db_session.commit()
+            db_session.refresh(user)
