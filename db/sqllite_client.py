@@ -11,7 +11,7 @@ class SqLiteClient:
 
     def __init__(self) -> None:
         self._engine = create_engine(self.database_path)
-        self._session = sessionmaker(bind=self.engine, autocommit=False, autoflush=False)
+        self._session = sessionmaker(bind=self._engine, autocommit=False, autoflush=False)
     
     def __call__(self) -> Session:
         session_local = self._session()
