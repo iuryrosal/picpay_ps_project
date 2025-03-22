@@ -1,0 +1,23 @@
+@startuml
+class SQLiteUserRepository
+
+interface IUserRepository
+
+class UserModel
+
+class SqLiteClient
+
+class UserSchema
+
+class UserService
+
+class UserController
+
+IUserRepository <|-- SQLiteUserRepository
+SQLiteUserRepository *-- SqLiteClient
+SQLiteUserRepository *-- UserModel
+UserService --> IUserRepository
+UserController --> UserService
+UserController *-- UserSchema
+
+@enduml
