@@ -7,7 +7,7 @@ from sqlalchemy.orm.session import Session
 SqLiteBase = declarative_base()
 
 class SqLiteClient:
-    database_path = 'sqlite:db/database.db'
+    database_path = "sqlite:///db/database.db"
 
     def __init__(self) -> None:
         self._engine = create_engine(self.database_path)
