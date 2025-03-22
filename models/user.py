@@ -1,9 +1,7 @@
 import sqlalchemy 
-from sqlalchemy.ext.declarative import declarative_base
+from db.sqllite_client import SqLiteBase
 
-Base = declarative_base()
-
-class User(Base):
+class User(SqLiteBase):
     __tablename__ = "user"
     __table_args__ = (
         sqlalchemy.PrimaryKeyConstraint("id", name="pk_use")
