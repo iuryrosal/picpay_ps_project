@@ -16,9 +16,10 @@ class UserService(IUserService):
         else:
             return (error_type, error_msg)
 
-    def create_user(self, first_name: str, last_name: str, email: str) -> Union[UserModel, Tuple[str, str]]:
-        user, error_type, error_msg = self.repository.create(first_name, last_name, email)
-        self._handle_response_from_repository(user, error_type, error_msg)
+    def create_user(self, first_name: str, email: str, last_name: str = None) -> Union[UserModel, Tuple[str, str]]:
+        user, error_type, error_msg = self.repository.create(first_name=first_name,
+                                                             last_name=last_name,
+                                                             email=email)
 
     def get_user(self, user_id: int) -> Union[UserModel, Tuple[str, str]]:
         user, error_type, error_msg = self.repository.select_by_id(user_id)
