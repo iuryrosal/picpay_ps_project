@@ -9,9 +9,9 @@ class UserCreateRequest(BaseModel):
 
 
 class UserUpdateRequest(BaseModel):
-    first_name: Optional[str]
-    last_name: Optional[str]
-    email: Optional[EmailStr]
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[EmailStr] = None
 
 
 class UserGeneralResponse(BaseModel):
