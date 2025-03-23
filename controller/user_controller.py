@@ -57,7 +57,7 @@ class UserController:
 
     @router.put("/users/{user_id}", status_code=200, response_model=UserGeneralResponse)
     async def update_user(user_id: int, user_update: UserUpdateRequest, service: IUserService = Depends(get_user_service)):
-        response = service.update_user(user_id, **user_update.dict())
+        response = service.update_user(user_id, user_update.dict())
         if isinstance(response, UserModel):
             return response
         else:
