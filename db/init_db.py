@@ -9,7 +9,7 @@ def generate_fake_data():
     fake_data = {
         "first_name": name.split(" ")[0],
         "last_name": " ".join(name.split(" ")[1:]),
-        "email": name.split(" ")[0] + "@" + fake.free_email_domain()
+        "email": name.split(" ")[1] + "@" + fake.free_email_domain()
     }
     return fake_data
 
