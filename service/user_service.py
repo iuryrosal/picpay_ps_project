@@ -31,8 +31,8 @@ class UserService(IUserService):
         users, error_type, error_msg  = self.repository.select_all()
         return self._handle_response_from_repository(users, error_type, error_msg)
 
-    def update_user(self, user_id: int, first_name: str, last_name: str, email: str) -> Union[UserModel, Tuple[str, str]]:
-        user, error_type, error_msg  = self.repository.update(user_id, first_name, last_name, email)
+    def update_user(self, user_id: int, new_user_data: dict) -> Union[UserModel, Tuple[str, str]]:
+        user, error_type, error_msg  = self.repository.update(user_id, new_user_data)
         return self._handle_response_from_repository(user, error_type, error_msg)
 
     def delete_user(self, user_id: int) -> Union[UserModel, Tuple[str, str]]:
