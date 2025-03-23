@@ -1,5 +1,10 @@
-from fastapi import APIRouter
-from api.v1 import user
+from fastapi import FastAPI
+from controller.user_controller import UserController
 
-api_router = APIRouter(prefix="/v1")
-api_router.include_router(user.router)
+app = FastAPI()
+
+app.include_router(UserController.router, prefix="/api", tags=["Users"])
+
+@app.get("/")
+def root():
+    return {"message": "Welcome to the FastAPI CRUD API"}
