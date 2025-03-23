@@ -1,6 +1,6 @@
 from models.user_model import UserModel
 from db.sqllite_client import SqLiteClient
-from typing import Tuple, Optional, List
+from typing import Tuple, Optional, List, Dict, Any
 from repositories.meta.interface_user_repository import IUserRepository
 
 
@@ -27,7 +27,7 @@ class UserRepository(IUserRepository):
         with next(self.db_client()) as db_session:
             user = db_session.query(UserModel).filter(UserModel.id == user_id).first()
             if not user:
-                return (None, "ValueError", f"User with id {user_id} not exists.")
+                return (None, "UserNotExists", f"User with id {user_id} not exists.")
             return (user, None, "")
 
     def update(self, user_id: int, first_name: str, email: str, last_name: str = None) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
@@ -41,13 +41,13 @@ class UserRepository(IUserRepository):
                 db_session.close()
                 return (user, None, "")
             else:
-                return (None, "ValueError", f"User with id {user_id} not exists.")
+                return (None, "UserNotExists", f"User with id {user_id} not exists.")
 
     def delete_by_id(self, user_id) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
         with next(self.db_client()) as db_session:
             user = self.select_by_id(user_id)[0]
             if not user:
-                return (None, "ValueError", f"User with id {user_id} not exists.")
+                return (None, "UserNotExists", f"User with id {user_id} not exists.")
             
             db_session.delete(user)
             db_session.commit()
