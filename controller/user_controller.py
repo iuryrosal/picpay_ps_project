@@ -64,10 +64,15 @@ class UserController:
             return UserController._handle_error_response_from_service(response)
 
 
-    @router.delete("/users/{user_id}", status_code=200, response_model=UserGeneralResponse)
+    @router.delete("/users/{user_id}", status_code=200, response_model=GenericOkResponse)
     def delete_user(user_id: int, service: IUserService = Depends(get_user_service)):
         response = service.delete_user(user_id)
         if isinstance(response, UserModel):
-            return response
+            generic_response = GenericOkResponse(
+                title="Usuário Deletado.",
+                message=f"Usuário com id {response.id} deletado com sucesso."
+            )
+            return JSONResponse(status_code=http.HTTPStatus.CREATED,
+                                content=generic_response.dict())
         else:
             return UserController._handle_error_response_from_service(response)
