@@ -1,7 +1,9 @@
 import http
-from fastapi import APIRouter, HTTPException, Depends
-from typing import List, Tuple, Union
+from fastapi import APIRouter, Depends
+from typing import List, Tuple
 from schemas.user_schema import UserCreateRequest, UserGeneralResponse, UserUpdateRequest
+from schemas.api_schema import GenericErrorResponse, GenericOkResponse
+from fastapi.responses import JSONResponse
 from models.user_model import UserModel
 from service.meta.interface_user_service import IUserService
 from service.user_service import UserService
@@ -23,11 +25,25 @@ class UserController:
             raise Exception(f"Service error tuple response have invalid values: {error_tuple}")
 
         if error_tuple[0] == "UserNotExists":
-            raise HTTPException(status_code=404,
-                                detail=f"{error_tuple[0]}: {error_tuple[1]}")
+            http_status_obj = http.HTTPStatus.NOT_FOUND
+            response = GenericErrorResponse(
+                status=http_status_obj.phrase,
+                code=error_tuple[0],
+                title=error_tuple[1],
+                detail=None
+            )
+            return JSONResponse(status_code=http_status_obj,
+                                content=response.dict())
         else:
-            raise HTTPException(status_code=400,
-                                detail=f"{error_tuple[0]}: {error_tuple[1]}")
+            http_status_obj = http.HTTPStatus.BAD_REQUEST
+            response = GenericErrorResponse(
+                status=http_status_obj.phrase,
+                code=error_tuple[0],
+                title=error_tuple[1],
+                detail=None
+            )
+            return JSONResponse(status_code=http_status_obj,
+                                content=response.dict())
 
     @router.post("/users/", status_code=201, response_model=UserGeneralResponse)
     async def create_user(user: UserCreateRequest, service: IUserService = Depends(get_user_service)):
