@@ -39,3 +39,23 @@ class UserService(IUserService):
         user, error_type, error_msg  = self.repository.delete_by_id(user_id)
         return self._handle_response_from_repository(user, error_type, error_msg)
 
+
+if __name__ == "__main__":
+    from repositories.user_repository import UserRepository
+    user_repo = UserRepository()
+    service = UserService(user_repo)
+
+    response = service.create_user("João", "Silva", "joao@email.com")
+    print("Usuário criado:", {response})
+
+    user_id = response.__dict__["id"]
+    response = service.get_user(user_id)
+    print("Usuário encontrado:", response)
+
+    print("Lista de usuários:", service.get_all_users())
+
+    response = service.update_user(user_id, "João", "Santos", "joao_santos@email.com")
+    print("Usuário atualizado:", response)
+
+    response = service.delete_user(user_id)
+    print("Usuário removido:", response) 
