@@ -6,5 +6,5 @@ app = FastAPI()
 app.include_router(UserController.router, prefix="/api", tags=["Users"])
 
 @app.get("/")
-def root():
+async def root():
     return {"message": "Welcome to the FastAPI CRUD API"}
