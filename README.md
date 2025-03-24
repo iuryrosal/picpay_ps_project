@@ -24,3 +24,10 @@ os dados no banco de dados SQLite.
 3. Execute o comando `poetry shell` na pasta raiz do projeto (em que está o arquivo `pyproject.toml`) para ativação do ambiente virtual com Python na versão 3.12 e dependências.
 4. Execute o comando `python -m db.init_db` para gerar o banco de dados SQLite localmente e popula-lo com dados fictícios na tabela User.
 5. Execute o comando `uvicorn api.app:app --host 0.0.0.0 --port 8080` para ativar a API.
+
+# Melhorias futuras do projeto:
+Visando o longo prazo, coloco alguns pontos de evolução possíveis para esse projeto:
+- Utilizar classes padrões para controlar os erros internos detectados pela checagens de repositório e service, para auxiliar na padronização, reuso e obter mais detalhes da falha.
+- Utilizar logging para auxiliar no registro de execuções e processamentos de requisições, com um track_id gerado para cada requisição, assim como detalhes do payload de processamento, detalhes dos erros. Essas informações também podem ser incorporadas na response da requisição (em caso de falhas detectadas). 
+- Evoluir a cobertura de testes (coverage) para obter algo entre 80-90%.
+- 
