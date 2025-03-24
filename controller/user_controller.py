@@ -22,7 +22,7 @@ class UserController:
     """
     router = APIRouter()
 
-    def _handle_error_response_from_service(error_tuple:  Tuple[str, str]):
+    def __handle_error_response_from_service(error_tuple:  Tuple[str, str]):
         if not isinstance(error_tuple, tuple) and len(error_tuple) == 2 and all(isinstance(item, str) for item in error_tuple):
             raise Exception(f"Service error tuple response have invalid format: {type(error_tuple)}")
         elif not len(error_tuple) == 2 and not all(isinstance(item, str) for item in error_tuple):
@@ -55,7 +55,7 @@ class UserController:
         if isinstance(response, UserModel):
             return response
         else:
-            return UserController._handle_error_response_from_service(response)
+            return UserController.__handle_error_response_from_service(response)
 
     @router.get("/users/", status_code=200, response_model=List[UserGeneralResponse])
     async def get_users(service: IUserService = Depends(get_user_service)):
@@ -63,7 +63,7 @@ class UserController:
         if isinstance(response, list) and all(isinstance(item, UserModel) for item in response):
             return response
         else:
-            return UserController._handle_error_response_from_service(response)
+            return UserController.__handle_error_response_from_service(response)
 
 
     @router.get("/users/{user_id}", status_code=200, response_model=UserGeneralResponse)
@@ -72,7 +72,7 @@ class UserController:
         if isinstance(response, UserModel):
             return response
         else:
-            return UserController._handle_error_response_from_service(response)
+            return UserController.__handle_error_response_from_service(response)
 
 
     @router.put("/users/{user_id}", status_code=200, response_model=UserGeneralResponse)
@@ -81,7 +81,7 @@ class UserController:
         if isinstance(response, UserModel):
             return response
         else:
-            return UserController._handle_error_response_from_service(response)
+            return UserController.__handle_error_response_from_service(response)
 
 
     @router.delete("/users/{user_id}", status_code=200, response_model=GenericOkResponse)
@@ -95,4 +95,4 @@ class UserController:
             return JSONResponse(status_code=http.HTTPStatus.CREATED,
                                 content=generic_response.dict())
         else:
-            return UserController._handle_error_response_from_service(response)
+            return UserController.__handle_error_response_from_service(response)
