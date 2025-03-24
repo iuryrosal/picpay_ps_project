@@ -4,6 +4,11 @@ from models.user_model import UserModel
 
 
 def generate_fake_data():
+    """Função que irá gerar dados fictícios para usuário (User), envolvendo Email, Primeiro Nome (first_name) e Sobrenome (last_name)
+
+    Returns:
+        dict: Dicionário com os dados fictícios gerados. Chaves: first_name, last_name, email
+    """
     fake = Faker("pt_BR")
     name = fake.name()
     fake_data = {
