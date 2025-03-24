@@ -1,4 +1,10 @@
+# cache local files
 __pycache__
 poetry.lock
 
+# sqlite database
 db/database.db
+
+# pytest-cov
+.coverage
+coverage_re
