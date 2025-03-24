@@ -23,6 +23,18 @@ class UserController:
     router = APIRouter()
 
     def __handle_error_response_from_service(error_tuple:  Tuple[str, str]):
+        """Em caso de falha detectada durante processamento da requisição, irá processar a tupla de erros (Título (str), Descrição (str)) gerando uma exceção em caso de tupla inválida e, em caso válido, gerará uma response padronizada de erro (JsonResponse).
+
+        Args:
+            error_tuple (Tuple[str, str]): _description_
+
+        Raises:
+            Exception: _description_
+            Exception: _description_
+
+        Returns:
+            JSONResponse: Padrão de resposta de requisição com status_code do HTTP e conteúdo no padrão do schema GenericErrorResponse, contendo status por texto, código do erro (título do erro), mensagem com a descrição do erro e detalhes.
+        """
         if not isinstance(error_tuple, tuple) and len(error_tuple) == 2 and all(isinstance(item, str) for item in error_tuple):
             raise Exception(f"Service error tuple response have invalid format: {type(error_tuple)}")
         elif not len(error_tuple) == 2 and not all(isinstance(item, str) for item in error_tuple):
