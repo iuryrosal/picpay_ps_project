@@ -10,7 +10,7 @@ Funcionalidade: (Controller de Usuário - UserController) Permitir operar a cria
         Dado a requisição de criação de um novo usuário com atributos obrigatórios faltantes (por meio do body da requisição)
         Quando o método de criação for utilizado no controller passando esses atributos por meio do método POST no endpoint `/users/`
         Entao o algoritmo irá validar a requisição
-        E irá retornar com HTTP_STATUS Bad Request (400) pela falta de atributos obrigatórios sem realizar contato com a camada de serviço (UserService)
+        E irá retornar com HTTP_STATUS Unprocessable Entity (422) pela falta de atributos obrigatórios sem realizar contato com a camada de serviço (UserService)
 
     Cenario: Solicitada seleção de usuário específico.
         Dado a requisição de seleção de um usuário a partir de um ID específico existente no banco de dados (passado via pârametro de caminho)
