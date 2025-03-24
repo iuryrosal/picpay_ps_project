@@ -1,4 +1,4 @@
-from tests.config.fixtures.sqlite_session import db_session
+from tests.config.fixtures import db_session
 from models.user_model import UserModel
 
 

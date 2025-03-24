@@ -1,6 +1,7 @@
 import pytest
 from sqlalchemy.orm import Session
-from tests.config.sqlite_client_test import TestSqLiteClient 
+from tests.config.test_sqlite_client import TestSqLiteClient 
+from tests.config.test_sqlite_user_repository import TestSQLiteUserRepository
 
 
 @pytest.fixture
