@@ -8,7 +8,7 @@ class UserService(IUserService):
     def __init__(self, repository: IUserRepository):
         self.repository = repository
 
-    def _handle_response_from_repository(self,
+    def __handle_response_from_repository(self,
                                          object_expected: Union[UserModel, List[UserModel], None],
                                          error_type: Union[str, None],
                                          error_msg: Union[str, None]) -> Union[UserModel, List[UserModel], Tuple[str, str]]:
@@ -45,7 +45,7 @@ class UserService(IUserService):
         user, error_type, error_msg = self.repository.create(first_name=first_name,
                                                              last_name=last_name,
                                                              email=email)
-        return self._handle_response_from_repository(user, error_type, error_msg)
+        return self.__handle_response_from_repository(user, error_type, error_msg)
 
     def get_user(self, user_id: int) -> Union[UserModel, Tuple[str, str]]:
         """Obtem usuário (User) existente no negócio, contendo as informações de primeiro nome (first_name), sobrenome (last_name) e email. É necessário um ID (identificador único) para especificar qual usuário deseja selecionar.
@@ -57,7 +57,7 @@ class UserService(IUserService):
             Union[UserModel, Tuple[str, str]]: Retorna o usuário selecionado no banco de dados pelo repositório (UserModel) ou uma Tupla com informações de erro (título e descrição, respectivamente) em caso de alguma falha esperada/identificada (Tuple[str, str]).
         """
         user, error_type, error_msg = self.repository.select_by_id(user_id)
-        return self._handle_response_from_repository(user, error_type, error_msg)
+        return self.__handle_response_from_repository(user, error_type, error_msg)
 
     def get_all_users(self) -> Union[List[UserModel], Tuple[str, str]]:
         """Coleta todos os usuários (User) existentes no negócio, contendo as informações de primeiro nome (first_name), sobrenome (last_name) e email de cada um.
@@ -66,7 +66,7 @@ class UserService(IUserService):
             Union[List[UserModel], Tuple[str, str]]: Retorna a lista de usuários selecionado no banco de dados pelo repositório (UserModel) ou uma Tupla com informações de erro (título e descrição, respectivamente) em caso de alguma falha esperada/identificada (Tuple[str, str]).
         """
         users, error_type, error_msg  = self.repository.select_all()
-        return self._handle_response_from_repository(users, error_type, error_msg)
+        return self.__handle_response_from_repository(users, error_type, error_msg)
 
     def update_user(self, user_id: int, new_user_data: dict) -> Union[UserModel, Tuple[str, str]]:
         """Atualiza alguma informação de usuário (User) dentro dos atributos disponiveis (first_name: str, last_name: str, email: str)
@@ -79,7 +79,7 @@ class UserService(IUserService):
             Union[UserModel, Tuple[str, str]]: Retorna o usuário atualizado no banco de dados pelo repositório (UserModel) ou uma Tupla com informações de erro (título e descrição, respectivamente) em caso de alguma falha esperada/identificada (Tuple[str, str]).
         """
         user, error_type, error_msg  = self.repository.update(user_id, new_user_data)
-        return self._handle_response_from_repository(user, error_type, error_msg)
+        return self.__handle_response_from_repository(user, error_type, error_msg)
 
     def delete_user(self, user_id: int) -> Union[UserModel, Tuple[str, str]]:
         """Deletar algum usuário específico (User) pelo id.
@@ -92,7 +92,7 @@ class UserService(IUserService):
             Union[UserModel, Tuple[str, str]]: Retorna o usuário deletado no banco de dados pelo repositório (UserModel) ou uma Tupla com informações de erro (título e descrição, respectivamente) em caso de alguma falha esperada/identificada (Tuple[str, str]).
         """
         user, error_type, error_msg  = self.repository.delete_by_id(user_id)
-        return self._handle_response_from_repository(user, error_type, error_msg)
+        return self.__handle_response_from_repository(user, error_type, error_msg)
 
 
 if __name__ == "__main__":
