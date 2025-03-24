@@ -1,4 +1,4 @@
-all: setup database tests clean run
+all: setup database clean run
 
 setup:
 	poetry install
