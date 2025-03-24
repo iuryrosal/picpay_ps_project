@@ -30,7 +30,9 @@ Nos subtópicos seguintes, contém informações de como executar localmente ess
 4. Execute o comando `python -m db.init_db` para gerar o banco de dados SQLite localmente e popula-lo com dados fictícios na tabela User. 
 5. Execute o comando `uvicorn api.app:app --host 0.0.0.0 --port 8080` para ativar a API.
 
-Observação: Se o `database.db` já estiver presente dentro da pasta `db`, o passo 4 não é necessário. 
+Observação: Se o `database.db` já estiver presente dentro da pasta `db`, o passo 4 não é necessário. Caso seja executado com o banco existente, mais registros fictícios serão adicionados ao banco de dados.
+
+Você pode executar o comando `make` que os passos indicados serão executados automaticamente pelo Makefile.
 
 ## Execução de Testes Unitários
 Com o ambiente virtual ativado, execute `pytest -v tests` para execução de todos os testes unitários. Para executar os testes com relatório de cobertura, execute `coverage run --source=. -m pytest -v tests && coverage report -m`.
