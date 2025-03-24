@@ -92,7 +92,7 @@ class UserController:
                 title="Usuário Deletado.",
                 message=f"Usuário com id {response.id} deletado com sucesso."
             )
-            return JSONResponse(status_code=http.HTTPStatus.CREATED,
+            return JSONResponse(status_code=http.HTTPStatus.OK,
                                 content=generic_response.dict())
         else:
             return UserController.__handle_error_response_from_service(response)
