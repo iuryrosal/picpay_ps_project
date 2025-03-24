@@ -30,4 +30,5 @@ Visando o longo prazo, coloco alguns pontos de evolução possíveis para esse p
 - Utilizar classes padrões para controlar os erros internos detectados pela checagens de repositório e service, para auxiliar na padronização, reuso e obter mais detalhes da falha.
 - Utilizar logging para auxiliar no registro de execuções e processamentos de requisições, com um track_id gerado para cada requisição, assim como detalhes do payload de processamento, detalhes dos erros. Essas informações também podem ser incorporadas na response da requisição (em caso de falhas detectadas). 
 - Evoluir a cobertura de testes (coverage) para obter algo entre 80-90%.
-- 
+- Melhorar o gerenciamento de contexto da classe SQLiteClient.
+- Adicionar possibilidade de paginação no processo de selecionar todos os usuários, assim como query parameters para controlar essa paginação ou colocar limites (isso seria muito bom imaginando casos de muitos usuários na tabela). Padrão: `/?page[offset]=0&page[limit]=10`
