@@ -11,7 +11,7 @@ class SQLiteUserRepository(IUserRepository):
         self.db_client = SqLiteClient()
     
     def create(self, first_name: str, email: str, last_name: str = None) -> Tuple[UserModel, Optional[str], Optional[str]]:
-        with next(self.db_client()) as db_session:
+        with self.db_client._get_session() as db_session:
             user = UserModel(first_name=first_name,
                             last_name=last_name,
                             email=email)
@@ -21,19 +21,19 @@ class SQLiteUserRepository(IUserRepository):
             return (user, None, None)
     
     def select_all(self) -> Tuple[List[UserModel], Optional[str], Optional[str]]:
-        with next(self.db_client()) as db_session:
+        with self.db_client._get_session() as db_session:
             users = db_session.query(UserModel).all()
             return (users, None, None)
     
     def select_by_id(self, user_id: int) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
-        with next(self.db_client()) as db_session:
+        with self.db_client._get_session() as db_session:
             user = db_session.query(UserModel).filter(UserModel.id == user_id).first()
             if not user:
                 return (None, "UserNotExists", f"User with id {user_id} not exists.")
             return (user, None, None)
 
     def update(self, user_id: int, new_user_data: dict) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
-        with next(self.db_client()) as db_session:
+        with self.db_client._get_session() as db_session:
             result = db_session.query(UserModel).filter(UserModel.id == user_id).update(
                 {key: value for key, value in new_user_data.items() if value is not None}
             )
@@ -47,7 +47,7 @@ class SQLiteUserRepository(IUserRepository):
             return (user, None, None)
 
     def delete_by_id(self, user_id) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
-        with next(self.db_client()) as db_session:
+        with self.db_client._get_session() as db_session:
             user = db_session.query(UserModel).filter(UserModel.id == user_id).first()
             if not user:
                 return (None, "UserNotExists", f"User with id {user_id} not exists.")

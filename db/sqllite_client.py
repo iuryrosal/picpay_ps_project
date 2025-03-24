@@ -27,3 +27,6 @@ class SqLiteClient:
             yield session_local
         finally:
             session_local.close()
+    
+    def _get_session(self):
+        return next(self.__call__())
