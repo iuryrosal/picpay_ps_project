@@ -12,4 +12,5 @@ RUN poetry install --without dev
 
 EXPOSE 8080
 
+ENTRYPOINT ["poetry", "run", "python", "-m", "db.init_db"]
 ENTRYPOINT ["poetry", "run", "uvicorn", "api.app:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
