@@ -97,7 +97,7 @@ class UserController:
 
 
     @router.delete("/users/{user_id}", status_code=200, response_model=GenericOkResponse)
-    def delete_user(user_id: int, service: IUserService = Depends(get_user_service)):
+    async def delete_user(user_id: int, service: IUserService = Depends(get_user_service)):
         response = service.delete_user(user_id)
         if isinstance(response, UserModel):
             generic_response = GenericOkResponse(
