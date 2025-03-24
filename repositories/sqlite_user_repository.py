@@ -18,19 +18,19 @@ class SQLiteUserRepository(IUserRepository):
             db_session.add(user)
             db_session.commit()
             db_session.refresh(user) 
-            return (user, None, "")
+            return (user, None, None)
     
     def select_all(self) -> Tuple[List[UserModel], Optional[str], Optional[str]]:
         with next(self.db_client()) as db_session:
             users = db_session.query(UserModel).all()
-            return (users, None, "")
+            return (users, None, None)
     
     def select_by_id(self, user_id: int) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
         with next(self.db_client()) as db_session:
             user = db_session.query(UserModel).filter(UserModel.id == user_id).first()
             if not user:
                 return (None, "UserNotExists", f"User with id {user_id} not exists.")
-            return (user, None, "")
+            return (user, None, None)
 
     def update(self, user_id: int, new_user_data: dict) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
         with next(self.db_client()) as db_session:
@@ -45,7 +45,7 @@ class SQLiteUserRepository(IUserRepository):
             db_session.commit()
             db_session.refresh(user)
             db_session.close()
-            return (user, None, "")
+            return (user, None, None)
 
     def delete_by_id(self, user_id) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
         with next(self.db_client()) as db_session:
@@ -55,22 +55,4 @@ class SQLiteUserRepository(IUserRepository):
             
             db_session.delete(user)
             db_session.commit()
-            return (user, None, "")
-
-if __name__ == "__main__":
-    repo = SQLiteUserRepository()
-
-    tuple_response = repo.create("João", "Silva", "joao@email.com")
-    print("Usuário criado:", {tuple_response[0].__dict__})
-
-    user_id = tuple_response[0].__dict__["id"]
-    tuple_response = repo.select_by_id(user_id)
-    print("Usuário encontrado:", tuple_response[0].__dict__)
-
-    print("Lista de usuários:", repo.select_all())
-
-    tuple_response = repo.update(user_id, "João", "Santos", "joao_santos@email.com")
-    print("Usuário atualizado:", tuple_response[0].__dict__)
-
-    tuple_response = repo.delete_by_id(user_id)
-    print("Usuário removido:", tuple_response[0].__dict__) 
+            return (user, None, None)
