@@ -33,7 +33,7 @@ class UserController:
             response = GenericErrorResponse(
                 status=http_status_obj.phrase,
                 code=error_tuple[0],
-                title=error_tuple[1],
+                msg=error_tuple[1],
                 detail=None
             )
             return JSONResponse(status_code=http_status_obj,
@@ -43,7 +43,7 @@ class UserController:
             response = GenericErrorResponse(
                 status=http_status_obj.phrase,
                 code=error_tuple[0],
-                title=error_tuple[1],
+                msg=error_tuple[1],
                 detail=None
             )
             return JSONResponse(status_code=http_status_obj,
@@ -89,8 +89,8 @@ class UserController:
         response = service.delete_user(user_id)
         if isinstance(response, UserModel):
             generic_response = GenericOkResponse(
-                title="Usuário Deletado.",
-                message=f"Usuário com id {response.id} deletado com sucesso."
+                code="UserDeleted.",
+                msg=f"Usuário com id {response.id} deletado com sucesso."
             )
             return JSONResponse(status_code=http.HTTPStatus.OK,
                                 content=generic_response.dict())

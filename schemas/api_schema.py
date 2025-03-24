@@ -3,11 +3,12 @@ from typing import List, Optional
 
 
 class GenericOkResponse(BaseModel):
-    title: str
-    message: str
+    code: str
+    msg: str
+    data: List = []
 
 class GenericErrorResponse(BaseModel):
     status: str
     code: str
-    title: str
+    msg: str
     detail: Optional[str]
