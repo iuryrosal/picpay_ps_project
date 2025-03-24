@@ -50,6 +50,16 @@ class UserController:
             )
             return JSONResponse(status_code=http_status_obj,
                                 content=response.dict())
+        elif error_tuple[0] == "UnexpectedError":
+            http_status_obj = http.HTTPStatus.INTERNAL_SERVER_ERROR
+            response = GenericErrorResponse(
+                status=http_status_obj.phrase,
+                code=error_tuple[0],
+                msg=error_tuple[1],
+                detail=None
+            )
+            return JSONResponse(status_code=http_status_obj,
+                                content=response.dict())
         else:
             http_status_obj = http.HTTPStatus.BAD_REQUEST
             response = GenericErrorResponse(
