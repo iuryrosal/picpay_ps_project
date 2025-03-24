@@ -7,17 +7,31 @@ class UserModel
 
 class SqLiteClient
 
-class UserSchema
+interface IUserService
 
 class UserService
 
 class UserController
 
-IUserRepository <|-- SQLiteUserRepository
-SQLiteUserRepository *-- SqLiteClient
-SQLiteUserRepository *-- UserModel
-UserService --> IUserRepository
-UserController --> UserService
-UserController *-- UserSchema
+class pydantic.BaseModel
+
+package schemas {
+
+}
+
+IUserRepository <|-- SQLiteUserRepository : implementa
+SQLiteUserRepository "1" *-- "1" SqLiteClient
+SQLiteUserRepository "1" *-- "many" UserModel
+IUserService <|-- UserService: implementa
+UserService  --> IUserRepository : depende
+UserService "1" *-- "1" SQLiteUserRepository
+UserController --> IUserService : depende
+UserController --> schemas : depende
+UserController "1" *-- "1" UserService
+pydantic.BaseModel <|-- schemas.UserCreateRequest
+pydantic.BaseModel <|-- schemas.UserUpdateRequest
+pydantic.BaseModel <|-- schemas.UserGeneralResponse
+pydantic.BaseModel <|-- schemas.GenericOkResponse
+pydantic.BaseModel <|-- schemas.GenericErrorResponse
 
 @enduml
