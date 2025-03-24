@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  fastapi:
+    container_name: picpay-api
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ENV=dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    
