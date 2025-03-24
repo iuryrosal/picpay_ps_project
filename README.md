@@ -27,14 +27,20 @@ Nos subtópicos seguintes, contém informações de como executar localmente ess
 1. É necessário a presença de POETRY na máquina para ativar o ambiente Python e dependências para execução desse projeto.
 2. Com POETRY disponível, execute o comando `poetry install` na pasta raiz do projeto (em que está o arquivo `pyproject.toml`) para realizar a instalação de todas as dependências listadas dentro do arquivo `pyproject.toml`.
 3. Execute o comando `poetry shell` na pasta raiz do projeto (em que está o arquivo `pyproject.toml`) para ativação do ambiente virtual com Python na versão 3.12 e dependências.
-4. Execute o comando `python -m db.init_db` para gerar o banco de dados SQLite localmente e popula-lo com dados fictícios na tabela User.
+4. Execute o comando `python -m db.init_db` para gerar o banco de dados SQLite localmente e popula-lo com dados fictícios na tabela User. 
 5. Execute o comando `uvicorn api.app:app --host 0.0.0.0 --port 8080` para ativar a API.
+
+Observação: Se o `database.db` já estiver presente dentro da pasta `db`, o passo 4 não é necessário. 
 
 ## Execução de Testes Unitários
 Com o ambiente virtual ativado, execute `pytest -v tests` para execução de todos os testes unitários. Para executar os testes com relatório de cobertura, execute `coverage run --source=. -m pytest -v tests && coverage report -m`.
 
 ## Execução via Docker
+Para executar a API dentro de um container no Docker, estando com o Docker inicializado, basta executar o comando `docker-compose up`. Vale lembrar que como o banco de dados é SQLite, o banco de dados ficará dentro do mesmo serviço que a API do FastApi. 
 
+Para evoluções futuras, é interessante separar o serviço do banco de dados do serviço de API. 
+
+Esse desacoplamento será útil na evolução do projeto para nuvem, em que o contexto de dados poderá ser localizado em serviços externos, como AWS RDS, Cloud SQL, etc..
 # Detalhes do Projeto
 Nos subtópicos seguintes, apresento detalhes da arquitetura e implementação desse projeto.
 ## Arquitetura e Padrões de Projeto
