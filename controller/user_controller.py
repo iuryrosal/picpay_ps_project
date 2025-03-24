@@ -101,7 +101,7 @@ class UserController:
         response = service.delete_user(user_id)
         if isinstance(response, UserModel):
             generic_response = GenericOkResponse(
-                code="UserDeleted.",
+                code="UserDeleted",
                 msg=f"Usuário com id {response.id} deletado com sucesso."
             )
             return JSONResponse(status_code=http.HTTPStatus.OK,
