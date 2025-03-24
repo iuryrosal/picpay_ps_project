@@ -3,10 +3,14 @@ from repositories.meta.interface_user_repository import IUserRepository
 from models.user_model import UserModel
 from service.meta.interface_user_service import IUserService
 
+from infra.log_config import LogService, handle_exceptions
+
 
 class UserService(IUserService):
+    __log_service = LogService()
     def __init__(self, repository: IUserRepository):
         self.repository = repository
+        self.__logger = self.__log_service.get_logger(__name__)
 
     def __handle_response_from_repository(self,
                                          object_expected: Union[UserModel, List[UserModel], None],
@@ -25,28 +29,36 @@ class UserService(IUserService):
             Union[UserModel, List[UserModel], Tuple[str, str]]: Retorna objeto esperado (UserModel ou List[UserModel]) ou Tupla de erro (Titulo (str), Descrição (str))
         """
         if object_expected:
+            self.__logger.info("Operação bem sucedida!")
             return object_expected
         else:
+            self.__logger.info(f"Operação com falha detectada: {error_type} - {error_msg}")
             return (error_type, error_msg)
 
+    @handle_exceptions(__log_service.get_logger(__name__))
     def create_user(self, first_name: str, email: str, last_name: str = None) -> Union[UserModel, Tuple[str, str]]:
+        self.__logger.info("Iniciando criação de usuário na camada repositório")
         user, error_type, error_msg = self.repository.create(first_name=first_name,
-                                                             last_name=last_name,
-                                                             email=email)
+                                                            last_name=last_name,
+                                                            email=email)
         return self.__handle_response_from_repository(user, error_type, error_msg)
 
+    @handle_exceptions(__log_service.get_logger(__name__))
     def get_user(self, user_id: int) -> Union[UserModel, Tuple[str, str]]:
         user, error_type, error_msg = self.repository.select_by_id(user_id)
         return self.__handle_response_from_repository(user, error_type, error_msg)
 
+    @handle_exceptions(__log_service.get_logger(__name__))
     def get_all_users(self) -> Union[List[UserModel], Tuple[str, str]]:
         users, error_type, error_msg  = self.repository.select_all()
         return self.__handle_response_from_repository(users, error_type, error_msg)
 
+    @handle_exceptions(__log_service.get_logger(__name__))
     def update_user(self, user_id: int, new_user_data: dict) -> Union[UserModel, Tuple[str, str]]:
         user, error_type, error_msg  = self.repository.update(user_id, new_user_data)
         return self.__handle_response_from_repository(user, error_type, error_msg)
 
+    @handle_exceptions(__log_service.get_logger(__name__))
     def delete_user(self, user_id: int) -> Union[UserModel, Tuple[str, str]]:
         user, error_type, error_msg  = self.repository.delete_by_id(user_id)
         return self.__handle_response_from_repository(user, error_type, error_msg)
