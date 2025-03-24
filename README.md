@@ -58,6 +58,37 @@ No final, o diagrama de classes que resume a implementação central desse proje
 - Envolvendo validações do corpo de requisições e respostas foi utilizado o Pydantic
 - Para construção dos testes unitários, utilizamos o Pytest.
 - Conexão com banco de dados e modelagem, utilizamos o SQLAlchemy.
+
+### Diagramação
+Para diagramação, foi utilizada a ferramenta [PlantUML](https://plantuml.com), com [extensão](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml) disponível no Visual Studio Code, permitindo construção de diagramas via linha de código, facilitando o versionamento, assim como na produtividade.
+
+Os diagramas estão disponíveis em `docs`.
+
+### Documentação dos Cenários de Testes
+Para mapear os cenários de testes e os comportamentos esperados para cada situação dentro das funcionalidades desse projeto foi utilizado o [Gherkin](https://cucumber.io/docs/gherkin/), assim padronizando a forma de escrever especificações de cenários, baseado na regra de negócio.
+
+Essas documentações estão disponíveis em `tests/scenarios`. 
+
+Gherkin possui [extensão](https://marketplace.visualstudio.com/items?itemName=alexkrechik.cucumberautocomplete) no Visual Studio Code, facilitando o processo de escrita e padronização.
+
+## Padrões de Git
+Para seguir boas práticas de Git foram utilizados Commits Atômicos, seguindo o padrão [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), combinado ao padrão [gitmoji](https://gitmoji.dev).
+
+O padrão principal para mensagens de commit nesse projeto é
+```
+[emoji] <type>[optional scope]: <description>
+```
+
+Exemplo:
+```
+♻️ refactor(sqlite_user_repository): improve efficiency of update
+```
+
+O idioma utilizado por padrão foi o inglês, para combinar com o nome dos módulos, funções, etc... que também seguiram esse mesmo idioma padrão.
+
+## Comportamento da API
+Para construção da lógica de como a API deveria reagir aos diferentes cenários de requisições em torno da lógica CRUD, atrelado ao método HTTP e endpoint, foi seguido a específicação [JSONApi (v1.1)](https://jsonapi.org/format). A intenção é facilitar o uso da API por outros desenvolvedores seguindo um padrão mais universal.
+
 # Evoluções do Projeto
 ## Melhorias futuras do projeto - nível código:
 Visando o longo prazo, coloco alguns pontos de evolução possíveis para esse projeto:
@@ -66,3 +97,5 @@ Visando o longo prazo, coloco alguns pontos de evolução possíveis para esse p
 - Evoluir a cobertura de testes (coverage) para obter algo entre 80-90%.
 - Melhorar o gerenciamento de contexto da classe SQLiteClient.
 - Adicionar possibilidade de paginação no processo de selecionar todos os usuários, assim como query parameters para controlar essa paginação ou colocar limites (isso seria muito bom imaginando casos de muitos usuários na tabela). Padrão: `/?page[offset]=0&page[limit]=10`
+
+## Evolução para Cloud
