@@ -44,7 +44,6 @@ class SQLiteUserRepository(IUserRepository):
 
             db_session.commit()
             db_session.refresh(user)
-            db_session.close()
             return (user, None, None)
 
     def delete_by_id(self, user_id) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
