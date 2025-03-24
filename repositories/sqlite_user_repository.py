@@ -34,16 +34,16 @@ class SQLiteUserRepository(IUserRepository):
 
     def update(self, user_id: int, new_user_data: dict) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
         with next(self.db_client()) as db_session:
-            user = db_session.query(UserModel).filter(UserModel.id == user_id).first()
-            if not user:
+            result = db_session.query(UserModel).filter(UserModel.id == user_id).update(
+                {key: value for key, value in new_user_data.items() if value is not None}
+            )
+
+            if not result:
                 return (None, "UserNotExists", f"User with id {user_id} not exists.")
 
-            for key, value in new_user_data.items():
-                if value is not None:
-                    setattr(user, key, value)
-
             db_session.commit()
-            db_session.refresh(user)
+
+            user = db_session.query(UserModel).filter(UserModel.id == user_id).first()
             return (user, None, None)
 
     def delete_by_id(self, user_id) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
