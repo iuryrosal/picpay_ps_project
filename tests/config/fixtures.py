@@ -10,3 +10,7 @@ def db_session() -> Session:
     db_client = TestSqLiteClient()
     with next(db_client()) as session:
         yield session
+
+@pytest.fixture
+def user_repo():
+    return TestSQLiteUserRepository()
