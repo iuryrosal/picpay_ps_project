@@ -1,0 +1,22 @@
+@startuml
+autonumber
+actor User
+
+User -> FastAPI_App : request
+== Recebimento e Validação de Requisição ==
+FastAPI_App -> UserController : /api/users endpoint
+== Processamento da Requisição ==
+UserController -> UserService : Processamento da Operação
+UserService -> SQLiteUserRepository : Operações de Persistencia de Dados (DAL)
+SQLiteUserRepository -> SQLiteClient : Conexão com Banco de Dados
+database dbUser
+SQLiteClient -> dbUser
+== Retorno do Processamento ==
+dbUser -> SQLiteClient
+SQLiteClient -> SQLiteUserRepository : Sessão do Banco de Dados
+SQLiteUserRepository -> UserService : Resultado das Operações de Pesistência (DAL)
+UserService -> UserController : Processamento do Resultado
+== Resposta da Requisição ==
+UserController -> FastAPI_App : Retorno da Requisição
+FastAPI_App -> User : response
+@enduml
