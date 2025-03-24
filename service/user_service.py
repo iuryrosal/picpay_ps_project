@@ -50,24 +50,3 @@ class UserService(IUserService):
     def delete_user(self, user_id: int) -> Union[UserModel, Tuple[str, str]]:
         user, error_type, error_msg  = self.repository.delete_by_id(user_id)
         return self.__handle_response_from_repository(user, error_type, error_msg)
-
-
-if __name__ == "__main__":
-    from repositories.sqlite_user_repository import SQLiteUserRepository
-    user_repo = SQLiteUserRepository()
-    service = UserService(user_repo)
-
-    response = service.create_user("João", "Silva", "joao@email.com")
-    print("Usuário criado:", {response})
-
-    user_id = response.__dict__["id"]
-    response = service.get_user(user_id)
-    print("Usuário encontrado:", response)
-
-    print("Lista de usuários:", service.get_all_users())
-
-    response = service.update_user(user_id, "João", "Santos", "joao_santos@email.com")
-    print("Usuário atualizado:", response)
-
-    response = service.delete_user(user_id)
-    print("Usuário removido:", response) 
