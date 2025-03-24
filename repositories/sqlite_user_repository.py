@@ -4,7 +4,7 @@ from typing import Tuple, Optional, List
 from repositories.meta.interface_user_repository import IUserRepository
 
 
-class UserRepository(IUserRepository):
+class SQLiteUserRepository(IUserRepository):
     """Realiza implementação da interface do repositório de usuário, que irá estabelecer conexão com o banco de dados SQLite (utilizando o SQLiteClient) e, por meio de ORM, realizar as operações necessárias.
     """
     def __init__(self) -> None:
@@ -98,7 +98,7 @@ class UserRepository(IUserRepository):
             return (user, None, "")
 
 if __name__ == "__main__":
-    repo = UserRepository()
+    repo = SQLiteUserRepository()
 
     tuple_response = repo.create("João", "Silva", "joao@email.com")
     print("Usuário criado:", {tuple_response[0].__dict__})

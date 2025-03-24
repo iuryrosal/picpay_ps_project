@@ -96,8 +96,8 @@ class UserService(IUserService):
 
 
 if __name__ == "__main__":
-    from repositories.user_repository import UserRepository
-    user_repo = UserRepository()
+    from repositories.sqlite_user_repository import SQLiteUserRepository
+    user_repo = SQLiteUserRepository()
     service = UserService(user_repo)
 
     response = service.create_user("João", "Silva", "joao@email.com")

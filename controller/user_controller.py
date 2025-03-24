@@ -7,11 +7,11 @@ from fastapi.responses import JSONResponse
 from models.user_model import UserModel
 from service.meta.interface_user_service import IUserService
 from service.user_service import UserService
-from repositories.user_repository import UserRepository
+from repositories.sqlite_user_repository import SQLiteUserRepository
 
 
 def get_user_service() -> IUserService:
-    user_repo = UserRepository()
+    user_repo = SQLiteUserRepository()
     return UserService(user_repo)
 
 
