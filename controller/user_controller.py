@@ -16,6 +16,10 @@ def get_user_service() -> IUserService:
 
 
 class UserController:
+    """Controller que estabelecerá as rotas e lógicas de validação da API no contexto de usuários (User).
+    
+    Após validada, utilizará a camada service para estabelecer lógicas de negócio e, posteriormente, comunicação com a camada repositório.
+    """
     router = APIRouter()
 
     def _handle_error_response_from_service(error_tuple:  Tuple[str, str]):
