@@ -4,7 +4,7 @@ from typing import Optional
 
 class UserCreateRequest(BaseModel):
     first_name: str
-    last_name: Optional[str]
+    last_name: Optional[str] = None
     email: EmailStr
 
 
