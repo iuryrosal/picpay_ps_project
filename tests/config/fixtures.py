@@ -4,7 +4,7 @@ from unittest.mock import AsyncMock, MagicMock
 from sqlalchemy.orm import Session
 from fastapi.testclient import TestClient
 
-from controller.user_controller import UserController, get_user_service
+from controller.v1.user_controller import UserController, get_user_service
 
 from tests.config.test_sqlite_client import TestSqLiteClient 
 from tests.config.test_sqlite_user_repository import TestSQLiteUserRepository
