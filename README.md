@@ -101,10 +101,15 @@ O idioma utilizado por padrão foi o inglês, para combinar com o nome dos módu
 ## Comportamento da API
 Para construção da lógica de como a API deveria reagir aos diferentes cenários de requisições em torno da lógica CRUD, atrelado ao método HTTP e endpoint, foi seguido a específicação [JSONApi (v1.1)](https://jsonapi.org/format). A intenção é facilitar o uso da API por outros desenvolvedores seguindo um padrão mais universal.
 
+## Logging
+O serviço de logging é utilizado na camada de serviço, para auxiliar na detecção de falhas inesperadas, exibir isso de forma mais documentada no log e direcionar elas da melhor forma para o Controller e assim construir uma View de forma mais eficiente nesses cenários. Além disso, o serviço de logging também auxilia nos casos bem sucedidos, realizando uma documentação dos processamentos de requisição.
+
+A configuração do logging foi realizada em `infra/log_config.py` em que é criado o `LogService` para auxiliar na orquestração de handlers de log na camada de serviço, assim como a disponibilidade de decoradores `handle_exception` para, de forma padronizada, incluir a manipulação de exceptions nos métodos da camada de serviço.
+
 # Evoluções do Projeto
 ## Melhorias futuras do projeto - nível código:
 Visando o longo prazo, coloco alguns pontos de evolução possíveis para esse projeto:
-- Utilizar classes padrões para controlar os erros internos detectados pela checagens de repositório e service, para auxiliar na padronização, reuso e obter mais detalhes da falha.
+- Utilizar classes padrões (classes Exception) para controlar os erros internos detectados pela checagens de repositório e service, para auxiliar na padronização, reuso e obter mais detalhes da falha, em vez de passar as strings diretamente.
 - Evoluir a lógica do logging para auxiliar no registro de execuções e processamentos de requisições, com um track_id gerado para cada requisição, assim como detalhes do payload de processamento, detalhes dos erros. Essas informações também podem ser incorporadas na response da requisição (em caso de falhas detectadas). 
 - Evoluir a cobertura de testes (coverage) para cobrir mais cenários de falhas.
 - Melhorar o gerenciamento de contexto da classe SQLiteClient.
