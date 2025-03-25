@@ -110,6 +110,7 @@ Visando o longo prazo, coloco alguns pontos de evolução possíveis para esse p
 - Melhorar o gerenciamento de contexto da classe SQLiteClient.
 - Adicionar possibilidade de paginação no processo de selecionar todos os usuários, assim como query parameters para controlar essa paginação ou colocar limites (isso seria muito bom imaginando casos de muitos usuários na tabela). Padrão: `/?page[offset]=0&page[limit]=10`
 - Dentro da função `__handle_error_response_from_service` no `UserController` pode ser feito uma Factory para melhorar a orquestração de erros, sendo útil principalmente em um cenário de evolução no número de possíveis falhas detectadas (o que no cenário atual provocaria uma grande quantidade de condicionais). Uma outra alternativa de melhoria no curto prazo seria o uso de `match case` em vez de condicionais.
+- Corrigir pendências do `flake8`.
 
 ## Evolução para Outras Entidades
 Imaginando o cenário de termos mais bancos de dados no contexto de User, seria apenas necessário realizar outras implementações para a `IUserRepository` para adaptar ao diferente contexto. Pois todas as classes (do contexto `User` como a `UserService`) dependem da interface `IUserRepository`.
