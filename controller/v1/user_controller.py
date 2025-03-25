@@ -51,8 +51,8 @@ class UserController:
             JSONResponse: Padrão de resposta de requisição com status_code do HTTP e conteúdo no padrão do schema GenericErrorResponse, contendo status por texto, código do erro (título do erro), mensagem com a descrição do erro e detalhes.
         """
         UserController.__verify_error_tuple(error_tuple)
-        
-        if error_tuple[0] == "UserNotExists":
+
+        if error_tuple[0] == "UserDoesNotExist":
             http_status_obj = http.HTTPStatus.NOT_FOUND
             response = GenericErrorResponse(
                 status=http_status_obj.phrase,

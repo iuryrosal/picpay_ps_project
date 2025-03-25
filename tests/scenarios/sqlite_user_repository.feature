@@ -30,7 +30,7 @@ Funcionalidade: (Repositório de Usuário do SQLite - SQLiteUserRepository) Perm
         Dado a seleção de um usuário específico a partir de um ID (identificação única) que não existe na tabela User.
         Quando o método de seleção de usuário por ID for utilizado no repositório
         Entao o algoritmo irá detectar a não existência do ID
-        E irá retornar o primeiro campo da Tupla vazio (por não achar o objeto), junto com os dois campos seguintes preenchidos com a claúsula 'UserNotExists' e mensagem de erro (que representa falhas detectadas).
+        E irá retornar o primeiro campo da Tupla vazio (por não achar o objeto), junto com os dois campos seguintes preenchidos com a claúsula 'UserDoesNotExist' e mensagem de erro (que representa falhas detectadas).
     
     Cenario: Solicitada atualização de um usuário específico.
         Dado a solicitação de atualização de um usuário específico a partir de um ID (identificação única), passando os novos valores para os atributos respectivos.
@@ -42,7 +42,7 @@ Funcionalidade: (Repositório de Usuário do SQLite - SQLiteUserRepository) Perm
         Dado a solicitação de atualização de um usuário específico a partir de um ID (identificação única) que não existe na tabela User, passando os novos valores para os atributos respectivos.
         Quando o método de atualização de usuário por ID for utilizado no repositório
         Entao o algoritmo irá detectar a não existência do ID
-        E irá retornar o primeiro campo da Tupla vazio (por não achar o objeto), junto com os dois campos seguintes preenchidos com a claúsula 'UserNotExists' e mensagem de erro (que representa falhas detectadas).
+        E irá retornar o primeiro campo da Tupla vazio (por não achar o objeto), junto com os dois campos seguintes preenchidos com a claúsula 'UserDoesNotExist' e mensagem de erro (que representa falhas detectadas).
 
     Cenario: Solicitada deleção de um usuário específico.
         Dado a solicitação de deleção de um usuário específico a partir de um ID (identificação única).
@@ -54,4 +54,4 @@ Funcionalidade: (Repositório de Usuário do SQLite - SQLiteUserRepository) Perm
         Dado a solicitação de deleção de um usuário específico a partir de um ID (identificação única) que não existe na tabela User.
         Quando o método de deleção de usuário por ID for utilizado no repositório
         Entao o algoritmo irá detectar a não existência do ID
-        E irá retornar o primeiro campo da Tupla vazio (por não achar o objeto), junto com os dois campos seguintes preenchidos com a claúsula 'UserNotExists' e mensagem de erro (que representa falhas detectadas).
+        E irá retornar o primeiro campo da Tupla vazio (por não achar o objeto), junto com os dois campos seguintes preenchidos com a claúsula 'UserDoesNotExist' e mensagem de erro (que representa falhas detectadas).

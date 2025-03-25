@@ -48,12 +48,12 @@ def test_get_user_success(fastapi_app_client, mock_user_service):
 
 
 def test_get_user_not_found(fastapi_app_client, mock_user_service):
-    mock_user_service.get_user.return_value = ("UserNotExists", "User with id 99 not exists.")
+    mock_user_service.get_user.return_value = ("UserDoesNotExist", "User with id 99 not exists.")
 
     response = fastapi_app_client.get("/users/99")
 
     assert response.status_code == 404
-    assert response.json()["code"] == "UserNotExists"
+    assert response.json()["code"] == "UserDoesNotExist"
 
 
 def test_update_user(fastapi_app_client, mock_user_service):
@@ -78,9 +78,9 @@ def test_delete_user(fastapi_app_client, mock_user_service):
 
 
 def test_delete_user_not_found(fastapi_app_client, mock_user_service):
-    mock_user_service.delete_user.return_value = ("UserNotExists", "User with id 99 not exists.")
+    mock_user_service.delete_user.return_value = ("UserDoesNotExist", "User with id 99 not exists.")
 
     response = fastapi_app_client.delete("/users/99")
 
     assert response.status_code == 404
-    assert response.json()["code"] == "UserNotExists"
+    assert response.json()["code"] == "UserDoesNotExist"

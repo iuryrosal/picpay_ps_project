@@ -28,8 +28,8 @@ class UserService(IUserService):
 
         Args:
             object_expected (Union[UserModel, List[UserModel], None]): Conterá o objeto esperado no retorno do repositório, normalmente sendo o UserModel. Em caso de falha detectada no repositório, esse objeto será None.
-            error_type (Union[str, None]): Título do erro reportado pelo repositório, normalmente indicado de maneira resumida e única o que aconteceu. Ex: 'UserNotExists' para indicar que o ID fornecido não existe no banco de dados.
-            error_msg (Union[str, None]): Mensagem que prover mais detalhes da falha, normalmente atrelando campos dinâmicos que ajudaram a entender a origem do problema. Ex: No caso de 'UserNotExists', a mensagem conterá o ID que foi fornecido e não localizou nenhum usuário atrelado a ele.
+            error_type (Union[str, None]): Título do erro reportado pelo repositório, normalmente indicado de maneira resumida e única o que aconteceu. Ex: 'UserDoesNotExist' para indicar que o ID fornecido não existe no banco de dados.
+            error_msg (Union[str, None]): Mensagem que prover mais detalhes da falha, normalmente atrelando campos dinâmicos que ajudaram a entender a origem do problema. Ex: No caso de 'UserDoesNotExist', a mensagem conterá o ID que foi fornecido e não localizou nenhum usuário atrelado a ele.
 
         Returns:
             Union[UserModel, List[UserModel], Tuple[str, str]]: Retorna objeto esperado (UserModel ou List[UserModel]) ou Tupla de erro (Titulo (str), Descrição (str))

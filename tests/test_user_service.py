@@ -23,11 +23,11 @@ def test_get_user(user_service, mock_sqlite_user_repository):
 
 def test_get_user_not_exist(user_service, mock_sqlite_user_repository):
     user_id = 1 # Does Not Exist
-    mock_sqlite_user_repository.select_by_id.return_value = (None, "UserNotExists", f"User with id {user_id} does not exist.")
+    mock_sqlite_user_repository.select_by_id.return_value = (None, "UserDoesNotExist", f"User with id {user_id} does not exist.")
 
     result = user_service.get_user(user_id=user_id)
 
-    assert result == ("UserNotExists", f"User with id {user_id} does not exist.")
+    assert result == ("UserDoesNotExist", f"User with id {user_id} does not exist.")
 
 def test_get_all_users(user_service, mock_sqlite_user_repository):
     mock_users = [UserModel(id=1, first_name="Iury", last_name="Rosal", email="rosal@gmail.com")]

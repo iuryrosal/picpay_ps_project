@@ -23,7 +23,7 @@ Funcionalidade: (Controller de Usuário - UserController) Permitir operar a cria
         Quando o método de seleção for utilizado no controller passando esses atributos por meio do método GET no endpoint `/users/{user_id}`
         Entao o algoritmo irá validar a requisição
         E realizar a chamada do método de seleção de usuário pelo ID no serviço (UserService)
-        E irá retornar com HTTP_STATUS NOT FOUND (404) por não encontrar o ID específico, com code=UserNotExists e msg especificando o usuário não encontrado com o id fornecido.
+        E irá retornar com HTTP_STATUS NOT FOUND (404) por não encontrar o ID específico, com code=UserDoesNotExist e msg especificando o usuário não encontrado com o id fornecido.
 
     Cenario: Solicitada seleção de todos os usuários.
         Dado a requisição de seleção de vários usuários
@@ -43,7 +43,7 @@ Funcionalidade: (Controller de Usuário - UserController) Permitir operar a cria
         Quando o método de atualização for utilizado no controller passando esses atributos por meio do método PUT no endpoint `/users/{user_id}`
         Entao o algoritmo irá validar a requisição
         E realizar a chamada do método de atualização de usuário pelo ID no serviço (UserService)
-        E irá retornar com HTTP_STATUS NOT FOUND (404) por não encontrar o ID específico, com code=UserNotExists e msg especificando o usuário não encontrado com o id fornecido.
+        E irá retornar com HTTP_STATUS NOT FOUND (404) por não encontrar o ID específico, com code=UserDoesNotExist e msg especificando o usuário não encontrado com o id fornecido.
 
     Cenario: Solicitada deleção de usuário específico.
         Dado a requisição de deleção de um usuário a partir de um ID específico existente no banco de dados (passado via pârametro de caminho).
