@@ -17,5 +17,5 @@ class UserUpdateRequest(BaseModel):
 class UserGeneralResponse(BaseModel):
     id: int
     first_name: str
-    last_name: Optional[str]
+    last_name: Optional[str] = None
     email: EmailStr
