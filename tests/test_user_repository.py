@@ -61,7 +61,7 @@ def test_select_by_id_not_exists(user_repo):
     
     assert user is None
     assert err_code == "UserNotExists"
-    assert err_msg == f"User with id {user_id} not exists."
+    assert err_msg == f"User with id {user_id} does not exist."
 
 def test_update_user(user_repo):
     user, _, _ = user_repo.create(first_name="Iury", last_name="Rosal", email="rosal@gmail.com")
@@ -88,7 +88,7 @@ def test_update_user_not_exists(user_repo):
 
     assert updated_user is None
     assert err_code == "UserNotExists"
-    assert err_msg == f"User with id {user_id} not exists."
+    assert err_msg == f"User with id {user_id} does not exist."
 
 def test_delete_user(user_repo):
     user, _, _ = user_repo.create(first_name="Iury", last_name="Rosal", email="rosal@gmail.com")
@@ -115,4 +115,4 @@ def test_delete_user_not_exists(user_repo):
 
     assert deleted_user is None
     assert err_code == "UserNotExists"
-    assert err_msg == f"User with id {user_id} not exists."
+    assert err_msg == f"User with id {user_id} does not exist."

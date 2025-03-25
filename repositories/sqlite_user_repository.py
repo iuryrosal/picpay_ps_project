@@ -29,7 +29,7 @@ class SQLiteUserRepository(IUserRepository):
         with self.db_client._get_session() as db_session:
             user = db_session.query(UserModel).filter(UserModel.id == user_id).first()
             if not user:
-                return (None, "UserNotExists", f"User with id {user_id} not exists.")
+                return (None, "UserNotExists", f"User with id {user_id} does not exist.")
             return (user, None, None)
 
     def update(self, user_id: int, new_user_data: dict) -> Tuple[Optional[UserModel], Optional[str], Optional[str]]:
@@ -39,7 +39,7 @@ class SQLiteUserRepository(IUserRepository):
             )
 
             if not result:
-                return (None, "UserNotExists", f"User with id {user_id} not exists.")
+                return (None, "UserNotExists", f"User with id {user_id} does not exist.")
 
             db_session.commit()
 
@@ -50,7 +50,7 @@ class SQLiteUserRepository(IUserRepository):
         with self.db_client._get_session() as db_session:
             user = db_session.query(UserModel).filter(UserModel.id == user_id).first()
             if not user:
-                return (None, "UserNotExists", f"User with id {user_id} not exists.")
+                return (None, "UserNotExists", f"User with id {user_id} does not exist.")
             
             db_session.delete(user)
             db_session.commit()
