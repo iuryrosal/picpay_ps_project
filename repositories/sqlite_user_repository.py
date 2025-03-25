@@ -5,8 +5,16 @@ from repositories.meta.interface_user_repository import IUserRepository
 
 
 class SQLiteUserRepository(IUserRepository):
-    """Realiza implementação da interface do repositório de usuário (IUserRepository), que irá estabelecer conexão com o banco de dados SQLite (utilizando o SQLiteClient) e, por meio de ORM, realizar as operações necessárias.
     """
+        Realiza implementação da interface do repositório de usuário (IUserRepository), que irá estabelecer conexão com o banco de dados SQLite (utilizando o SQLiteClient) e, por meio de ORM, realizar as operações necessárias.
+    """
+
+    _instance = None
+    def __new__(cls, *args, **kwargs): # Singleton
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
     def __init__(self) -> None:
         self.db_client = SqLiteClient()
     

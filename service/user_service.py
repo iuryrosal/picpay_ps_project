@@ -8,6 +8,12 @@ from infra.log_config import LogService, handle_exceptions
 
 class UserService(IUserService):
     __log_service = LogService()
+    _instance = None
+    def __new__(cls, *args, **kwargs): # Singleton
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
     def __init__(self, repository: IUserRepository):
         self.repository = repository
         self.__logger = self.__log_service.get_logger(__name__)
