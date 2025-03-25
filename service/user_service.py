@@ -45,24 +45,24 @@ class UserService(IUserService):
 
     @handle_exceptions(__log_service.get_logger(__name__))
     def get_user(self, user_id: int) -> Union[UserModel, Tuple[str, str]]:
-        self.__logger(f"Iniciando seleção do usuário {user_id} na camada repositório")
+        self.__logger.info(f"Iniciando seleção do usuário {user_id} na camada repositório")
         user, error_type, error_msg = self.repository.select_by_id(user_id)
         return self.__handle_response_from_repository(user, error_type, error_msg)
 
     @handle_exceptions(__log_service.get_logger(__name__))
     def get_all_users(self) -> Union[List[UserModel], Tuple[str, str]]:
-        self.__logger(f"Iniciando seleção de todos os usuários na camada repositório")
+        self.__logger.info(f"Iniciando seleção de todos os usuários na camada repositório")
         users, error_type, error_msg  = self.repository.select_all()
         return self.__handle_response_from_repository(users, error_type, error_msg)
 
     @handle_exceptions(__log_service.get_logger(__name__))
     def update_user(self, user_id: int, new_user_data: dict) -> Union[UserModel, Tuple[str, str]]:
-        self.__logger(f"Iniciando atualização do usuário {user_id} na camada repositório")
+        self.__logger.info(f"Iniciando atualização do usuário {user_id} na camada repositório")
         user, error_type, error_msg  = self.repository.update(user_id, new_user_data)
         return self.__handle_response_from_repository(user, error_type, error_msg)
 
     @handle_exceptions(__log_service.get_logger(__name__))
     def delete_user(self, user_id: int) -> Union[UserModel, Tuple[str, str]]:
-        self.__logger(f"Iniciando deleção do usuário {user_id} na camada repositório")
+        self.__logger.info(f"Iniciando deleção do usuário {user_id} na camada repositório")
         user, error_type, error_msg  = self.repository.delete_by_id(user_id)
         return self.__handle_response_from_repository(user, error_type, error_msg)
