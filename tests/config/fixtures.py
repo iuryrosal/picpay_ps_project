@@ -5,6 +5,8 @@ from sqlalchemy.orm import Session
 from fastapi.testclient import TestClient
 
 from controller.v1.user_controller import UserController, get_user_service
+from service.user_service import UserService
+from repositories.meta.interface_user_repository import IUserRepository
 
 from tests.config.test_sqlite_client import TestSqLiteClient 
 from tests.config.test_sqlite_user_repository import TestSQLiteUserRepository
@@ -20,6 +22,15 @@ def db_session() -> Session:
 @pytest.fixture
 def user_repo():
     return TestSQLiteUserRepository()
+
+
+@pytest.fixture
+def mock_sqlite_user_repository():
+    return MagicMock(spec=IUserRepository)
+
+@pytest.fixture
+def user_service(mock_sqlite_user_repository):
+    return UserService(mock_sqlite_user_repository)
 
 @pytest.fixture
 def mock_user_service():
